@@ -11,8 +11,6 @@ const translateX = useRef(new Animated.Value(0)).current;
 const translateY = useRef(new Animated.Value(0)).current; 
 const lastScale = useRef(1);
 
-const [releaseScale, setReleaseScale] = useState(1);
-
   const onPinchGestureEvent = Animated.event(
     [{ nativeEvent: { scale: scale } }],
     { useNativeDriver: false }
@@ -60,18 +58,9 @@ const [releaseScale, setReleaseScale] = useState(1);
                 { translateY: translateY}],
           }}
         >
-          <Floor1Svg width="100%" height="100%" />
+          <Floor1Svg width="100%" height="100%" className=''/>
           <Animated.View style={styles.roomNumbersContainer}>
-              <Animated.View style={[
-                styles.roomNumber, 
-                { 
-                  top: Animated.divide(300, scale), 
-                  left: Animated.divide(150, scale) 
-                }
-              ]}>
-                <Text style={styles.text}>101</Text>
-              </Animated.View>
-              <RoomNumber roomNumber="200" height="300" width="200" scale={scale}/>
+              <RoomNumber top={300} left={150} scale={scale} number={"102"} textSize={10} />
           </Animated.View>
         </Animated.View>
       </View>
@@ -91,16 +80,9 @@ const styles = StyleSheet.create({
   },
   roomNumber: {
     position: "absolute",
-    backgroundColor: "white",
-    padding: 5,
-    borderRadius: 5,
-    elevation: 3,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
   },
   text: {
     fontWeight: "bold",
+    fontSize: 10,
   },
 });
