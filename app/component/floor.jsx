@@ -3,6 +3,7 @@ import { View, Animated, StyleSheet, Text } from 'react-native';
 import { PinchGestureHandler, State, PanGestureHandler } from 'react-native-gesture-handler';
 import Floor1Svg from "../images/kcalfinal.svg";
 import RoomNumber from './roomNumber';
+import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view';
 
 export default function Floor() {
 
@@ -41,34 +42,27 @@ const lastScale = useRef(1);
   };
 
   return (
-    <PinchGestureHandler
-      onGestureEvent={onPinchGestureEvent}
-      onHandlerStateChange={onPinchStateChange}
-    >
-    <PanGestureHandler
-        onGestureEvent={onPanGestureEvent}
-        // onHandlerStateChange={onPanHandlerStateChange}
-      >
-      <View>
-        <Animated.View
-          style={{
-            transform: [{ scale: scale },
-                { translateX: translateX},
-                { translateY: translateY}],
-          }}
+      <View className='w-full h-full'>
+        <ReactNativeZoomableView
+          maxZoom={3}
+          minZoom={1}
+          zoomStep={1}
+          initialZoom={1}
+          bindToBorders={true}
+          onZoomAfter={this.logOutZoomState}
         >
           <Floor1Svg width="100%" height="100%" className=''/>
-          <Animated.View style={styles.roomNumbersContainer}>
-              <RoomNumber top={41} left={12.5} scale={scale} number={"1717"} textSize={4} />
+          {/* <View style={styles.roomNumbersContainer}>
+              <RoomNumber top={41} left={12.7} scale={scale} number={"1717"} textSize={4} />
               <RoomNumber top={39.5} left={16} scale={scale} number={"1719"} textSize={4} />
-              <RoomNumber top={41} left={9} scale={scale} number={"1708"} textSize={10} />
-              <RoomNumber top={41} left={50} scale={scale} number={"1708"} textSize={10} />
+              <RoomNumber top={43} left={2.5} scale={scale} number={"1708"} textSize={10} />
+              <RoomNumber top={54} left={13} scale={scale} number={"1701"} textSize={5} />
+              <RoomNumber top={51} left={13} scale={scale} number={"1703"} textSize={4} />
+              <RoomNumber top={52} left={2.3} scale={scale} number={"1800"} textSize={10} />
               {/* lock in james */}
-          </Animated.View>
-        </Animated.View>
+          {/* </View> */}
+        </ReactNativeZoomableView>
       </View>
-      </PanGestureHandler>
-    </PinchGestureHandler>
   );
 }
 
