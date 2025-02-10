@@ -15,7 +15,7 @@ export default function Header({}) {
   ]);
 
     return (
-      <View className="flex flex-row justify-between h-full max-w-full">        
+      <View className="flex flex-row justify-between h-full max-w-full bg-white">        
         <View className="flex align-between justify-between">
           <TouchableOpacity>
             <Image source={require('../images/favicon.png')}/>

@@ -11,8 +11,10 @@ export default function Index() {
           <View className="h-1/5 z-10">
             <Header />
           </View>
-          <View className="w-screen z-1">
+          <View className="h-3/5 w-screen z-1">
             <Floor/>
+          </View>
+          <View className="h-1/5 z-10 bg-white">
           </View>
       </SafeAreaView>
     </GestureHandlerRootView>

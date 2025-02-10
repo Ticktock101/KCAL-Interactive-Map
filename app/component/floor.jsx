@@ -41,7 +41,6 @@ const lastScale = useRef(1);
   };
 
   return (
-
     <PinchGestureHandler
       onGestureEvent={onPinchGestureEvent}
       onHandlerStateChange={onPinchStateChange}
@@ -60,7 +59,11 @@ const lastScale = useRef(1);
         >
           <Floor1Svg width="100%" height="100%" className=''/>
           <Animated.View style={styles.roomNumbersContainer}>
-              <RoomNumber top={300} left={150} scale={scale} number={"102"} textSize={10} />
+              <RoomNumber top={41} left={12.5} scale={scale} number={"1717"} textSize={4} />
+              <RoomNumber top={39.5} left={16} scale={scale} number={"1719"} textSize={4} />
+              <RoomNumber top={41} left={9} scale={scale} number={"1708"} textSize={10} />
+              <RoomNumber top={41} left={50} scale={scale} number={"1708"} textSize={10} />
+              {/* lock in james */}
           </Animated.View>
         </Animated.View>
       </View>
