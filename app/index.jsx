@@ -1,21 +1,21 @@
 import { Text, View, SafeAreaView } from "react-native";
 import Header from "./component/header";
 import Floor from "./component/floor";
-import RoomNumber from "./component/roomNumber";
+import SecondFloor from "./component/secondFloor";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function Index() {
   return (
     <GestureHandlerRootView className="bg-white">
       <SafeAreaView className="h-screen max-w-full">
-          <View className="h-1/5 z-10">
+          <View className="h-1/6 z-10">
             <Header />
           </View>
           <View className="h-3/5 w-screen z-1">
             <Floor/>
           </View>
-          <View className="h-1/5 z-10 bg-white">
-          </View>
+          {/* <View className="h-1/6 z-10 bg-white">
+          </View> */}
       </SafeAreaView>
     </GestureHandlerRootView>
 
