@@ -15,16 +15,9 @@ export default function Header({}) {
   ]);
 
     return (
-      <View className="flex flex-row justify-between h-full max-w-full bg-white">        
-        <View className="flex align-between justify-between">
-          <TouchableOpacity>
-            <Image source={require('../images/favicon.png')}/>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={require('../images/favicon.png')}/>
-          </TouchableOpacity>
-        </View>
-        <View className="h-auto flex flex-auto w-5/6 items-center">
+      <View className="flex flex-row justify-center items-center w-5/6">        
+      
+        <View className="h-auto flex flex-auto items-center">
             <DropDownPicker
               open={open}
               value={value}
@@ -33,14 +26,6 @@ export default function Header({}) {
               setValue={setValue}
               setItems={setItems}
             />
-        </View>
-        <View className="flex align-between justify-between">
-          <TouchableOpacity>
-            <Image source={require('../images/favicon.png')}/>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image source={require('../images/favicon.png')}/>
-          </TouchableOpacity>
         </View>
       </View >
     );
