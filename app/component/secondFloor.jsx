@@ -46,7 +46,7 @@ export default function SecondFloor() {
             <RoomNumber top={46} left={39.5} number={"2206"} textSize={3} />
             <RoomNumber top={39} left={33} number={"2207"} textSize={4.5} />
             <RoomNumber top={39} left={40} number={"2209"} textSize={4.5} />
-            <RoomNumber top={44.8} left={51.4} number={"2210"} textSize={4.5} />
+            <RoomNumber top={44.6} left={51.4} number={"2210"} textSize={4.5} />
             <RoomNumber top={39} left={48.7} number={"2211"} textSize={4.5} />
             <RoomNumber top={45.5} left={57.1} number={"2212"} textSize={4.5} />
             <RoomNumber top={40.5} left={53.3} number={"2213"} textSize={3} />
