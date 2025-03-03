@@ -75,7 +75,7 @@ export default function Floor() {
               <RoomNumber top={45} left={42.5} number={"1506"} textSize={4.5} />
               <RoomNumber top={42.2} left={51} number={"1507"} textSize={4.5} />
 
-              {/*1500s*/}
+              {/*1600s*/}
               <RoomNumber top={52.5} left={23.2} number={"1602"} textSize={4.5} />
               <RoomNumber top={52.65} left={37.03} number={"1603"} textSize={4.5} />
               <RoomNumber top={46.3} left={26} number={"1604"} textSize={4.5} />
@@ -85,11 +85,6 @@ export default function Floor() {
               <RoomNumber top={37} left={36.2} number={"1612"} textSize={4} />
               <RoomNumber top={35.5} left={40.5} number={"1614"} textSize={6} />
               <RoomNumber top={41.25} left={41} number={"1615"} textSize={4.5} />
-
-
-
-
-
 
               {/* lock in bumka */}
           </View>

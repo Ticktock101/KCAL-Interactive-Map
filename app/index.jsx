@@ -28,9 +28,9 @@ export default function Index() {
             <Image source={require('./images/favicon.png')} className=" "/>
           </View>
           
-          <View className=" flex flex-row justify-around w-1/2">
-            <TouchableOpacity>
-              <Image source={require('./images/favicon.png')}/>
+          <View className=" flex flex-row justify-around w-1/2 max-h-full">
+            <TouchableOpacity className="max-h-full">
+              <Image source={require('./images/favicon.png')} className="max-h-full"/>
             </TouchableOpacity>
             <TouchableOpacity>
               <Image source={require('./images/favicon.png')}/>
@@ -52,7 +52,7 @@ export default function Index() {
             />
         </View>
         <View className="h-3/5 w-screen z-1">
-        {(value == 'Floor 2') ?   <SecondFloor/> : <Floor/>}
+          {(value == 'Floor 2') ? <SecondFloor/> : <Floor/>}
         </View>
         <View className="h-2/6 w-full z-10">
             
