@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 
-const RoomNumber = ({ top, left, scale, number, textSize }) => {
+const RoomNumber = ({ top, left, scale, number, textSize, department }) => {
 
   return (
     <Animated.View style={[
@@ -14,7 +14,7 @@ const RoomNumber = ({ top, left, scale, number, textSize }) => {
       
     ]} className={"z-9"}>
       <TouchableOpacity>
-        <Animated.Text style={[styles.text, { fontSize: textSize }]}>
+        <Animated.Text style={[styles.text, { fontSize: textSize }, styles[department]]}>
           {number}
         </Animated.Text>
       </TouchableOpacity>
@@ -29,6 +29,47 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
   },
+  engineering: {
+    color: "#ff8020"
+  },
+  healthScience: {
+    color: "blue"
+  },
+  kca: {
+    color: "green"
+  },
+  CS: {
+    color: "pink"
+  },
+  architecture: {
+    color: "#f0b000"
+  },
+  construction: {
+    color: "#c51930"
+  },
+  culinary: {
+    color: "#30a0d0"
+  },
+  welding: {
+    color: "#95f"
+  },
+  animalScience: {
+    color: "#2b9"
+  },
+  av: {
+    color: "#239"
+  },
+  adultTransition: {
+    color: "#b31"
+  },
+  cosmetology: {
+    color: "#19e"
+  },
+  law: {
+    color: "#fc6"
+  },
+
 });
 
 export default RoomNumber;
+{/*lock in bumka*/}
