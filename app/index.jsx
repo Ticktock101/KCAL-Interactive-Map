@@ -49,6 +49,7 @@ export default function Index() {
               setValue={setValue}
               setItems={setItems}
               placeholder="Floor 1"
+              className="b-5"
             />
         </View>
         <View className="h-3/5 w-screen z-1">
