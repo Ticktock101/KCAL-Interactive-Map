@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Text, StyleSheet, Button } from 'react-native';
+import { Animated, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 
 const RoomNumber = ({ top, left, scale, number, textSize }) => {
 
@@ -13,7 +13,11 @@ const RoomNumber = ({ top, left, scale, number, textSize }) => {
       }
       
     ]} className={"z-9"}>
-        <Animated.Text style={[styles.text, { fontSize: textSize }]}>{number}</Animated.Text>
+      <TouchableOpacity>
+        <Animated.Text style={[styles.text, { fontSize: textSize }]}>
+          {number}
+        </Animated.Text>
+      </TouchableOpacity>
     </Animated.View>
   );
 }

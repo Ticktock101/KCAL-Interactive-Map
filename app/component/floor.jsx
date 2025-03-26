@@ -16,21 +16,21 @@ export default function Floor() {
           bindToBorders={true}
           // onZoomAfter={this.logOutZoomState}
         >
-          <Floor1Svg width="100%" height="100%" className=''/>
-          <View style={styles.roomNumbersContainer}>
+          <Floor1Svg width="100%" height="100%" className="z-8"/>
+          <View style={styles.roomNumbersContainer} className='z-9'>
 
               {/*1700s*/}
-              <RoomNumber top={41} left={12.7} number={"1717"} textSize={4} className="av"/>
-              <RoomNumber top={39.5} left={16} number={"1719"} textSize={4} className="av"/>
-              <RoomNumber top={43} left={2.5} number={"1708"} textSize={10} className="cosmetology"/>
-              <RoomNumber top={54} left={13} number={"1701"} textSize={5} className="av"/>
+              <RoomNumber top={41} left={12.7} number={"1717"} textSize={4} className="av" department=""/>
+              <RoomNumber top={39.5} left={16} number={"1719"} textSize={4} className="av" department=""/>
+              <RoomNumber top={43} left={2.5} number={"1708"} textSize={10} className="cosmetology"department=""/>
+              <RoomNumber top={54} left={13} number={"1701"} textSize={5} className="av" department=""/>
               <RoomNumber top={50.9} left={13} number={"1703"} textSize={4} />
 
-              <RoomNumber top={52} left={2.3} number={"1800"} textSize={10} />
+              <RoomNumber top={52} left={2.3} number={"1800"} textSize={10} department=""/>
 
               {/*1100s*/}
-              <RoomNumber top={64.4} left={2.8} number={"1100"} textSize={5} className="kca"/>
-              <RoomNumber top={62.9} left={7.8} number={"1102"} textSize={3} />
+              <RoomNumber top={64.4} left={2.8} number={"1100"} textSize={5} className="kca" department=""/>
+              <RoomNumber top={62.9} left={7.8} number={"1102"} textSize={3} department=""/>
               <RoomNumber top={66.1} left={8.8} number={"1104"} textSize={4} className="adult-transition"/>
               <RoomNumber top={56} left={19.3} number={"1105"} textSize={4} className="av"/>
               <RoomNumber top={64} left={39.52} number={"1110"} textSize={5} />
