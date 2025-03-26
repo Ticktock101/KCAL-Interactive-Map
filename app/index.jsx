@@ -23,20 +23,20 @@ export default function Index() {
     <GestureHandlerRootView className="bg-white">
       <SafeAreaView className="h-screen max-w-full">
 
-        <View className="flex flex-row w-auto justify-between m-4">
-          <View className="">
-            <Image source={require('./images/favicon.png')} className=" "/>
+        <View className="flex flex-row w-full justify-between m-3 h-14">
+          <View className="w-1/3 object-contain">
+            <Image source={require('./images/kcal logo.png')} className=" max-h-full max-w-full" resizeMode="contain"/>
           </View>
           
-          <View className=" flex flex-row justify-around w-1/2 max-h-full">
-            <TouchableOpacity className="max-h-full">
-              <Image source={require('./images/favicon.png')} className="max-h-full"/>
+          <View className=" flex flex-row justify-around w-1/2 max-h-full mr-4">
+            <TouchableOpacity className="object-contain w-1/3">
+              <Image source={require('./images/gps.png')} className="max-h-full max-w-full" resizeMode="contain"/>
             </TouchableOpacity>
-            <TouchableOpacity>
-              <Image source={require('./images/favicon.png')}/>
+            <TouchableOpacity className="object-contain w-1/3">
+              <Image source={require('./images/search.png')} className="max-h-full max-w-full" resizeMode="contain"/>
             </TouchableOpacity>
-            <TouchableOpacity>
-            <Image source={require('./images/favicon.png')}/>
+            <TouchableOpacity className="object-contain w-1/3">
+              <Image source={require('./images/filter.png')} className="max-h-full max-w-full" resizeMode="contain"/>
             </TouchableOpacity>
           </View>
         </View>
