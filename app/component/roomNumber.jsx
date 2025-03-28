@@ -1,7 +1,11 @@
 import React from 'react';
 import { Animated, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 
-const RoomNumber = ({ top, left, scale, number, textSize, department }) => {
+const RoomNumber = ({ top, left, scale, number, textSize, department, onSendRoomNumber }) => {
+
+  const sendDataToParent = () => {
+    onSendMessage(number);
+  };
 
   return (
     <Animated.View style={[
@@ -13,8 +17,8 @@ const RoomNumber = ({ top, left, scale, number, textSize, department }) => {
       }
       
     ]} className={"z-9"}>
-      <TouchableOpacity>
-        <Animated.Text style={[styles.text, { fontSize: textSize }, styles[department]]}>
+      <TouchableOpacity onPress={sendDataToParent}>
+        <Animated.Text style={[styles.text, { fontSize: textSize }, styles[department]]} >
           {number}
         </Animated.Text>
       </TouchableOpacity>
@@ -39,7 +43,7 @@ const styles = StyleSheet.create({
     color: "green"
   },
   CS: {
-    color: "pink"
+    color: "#e3b"
   },
   architecture: {
     color: "#f0b000"
