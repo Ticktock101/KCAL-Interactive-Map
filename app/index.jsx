@@ -32,6 +32,10 @@ export default function Index() {
   const [isCheckedCS, setCheckedCS] = useState(false);
   const [isCheckedCulinary, setCheckedCulinary] = useState(false);
   const [isCheckedLaw, setCheckedLaw] = useState(false);
+  const [isCheckedOffice, setCheckedOffice] = useState(false);
+  const [isCheckedConstruction, setCheckedContruction] = useState(false);
+
+
 
 
   const filteredPressed = () => {
@@ -75,84 +79,63 @@ export default function Index() {
         </View>
         )}
 
-        
-        <View className="z-9 h-1/5 w-screen">
-          <ScrollView className="">
+        {isFiltered && (
+        <View className="z-9 h-auto w-screen flex flex-row justify-around mt-3">
+          <View className="">
             <Checkboxes department={"Engineering"} checked={isCheckedEngineering} onSendCheck={setCheckedEngineering}/>
-            {/* <Checkbox
-              value={isCheckedEngineering} 
-              onValueChange={setCheckedEngineering}
-            />
-            <Text>
-              Engineering
-            </Text>
-            <Checkbox
-              value={isCheckedAV} 
-              onValueChange={setCheckedAV}
-            />
-            <Text>
-              AV
-            </Text>
-            <Checkbox
-              value={isCheckedCosmo} 
-              onValueChange={setCheckedCosmo}
-            />
-            <Text>
-              Cosmotelogy
-            </Text>
-
-
-            <Checkbox
-              value={isCheckedKCA} 
-              onValueChange={setCheckedKCA}
-            />
-            <Text>
-              KCA
-            </Text>
-            <Checkbox
-              value={isCheckedAdultTransition} 
-              onValueChange={setCheckedAdultTransition}
-            />
-            <Text>
-              Adult Transition
-            </Text>
-            <Checkbox
-              value={isCheckedHealthScience} 
-              onValueChange={setCheckedHealthScience}
-            />
-
-
-            <Checkbox
-              value={isCheckedAnimalScience} 
-              onValueChange={setCheckedAnimalScience}
-            />
-            <Checkbox
-              value={isCheckedArchitecture} 
-              onValueChange={setCheckedArchitecture}
-            />
-            <Checkbox
-              value={isCheckedWelding} 
-              onValueChange={setCheckedWelding}
-            />
-
-            
-            <Checkbox
-              value={isCheckedCS} 
-              onValueChange={setCheckedCS}
-            />
-            <Checkbox
-              value={isCheckedCulinary} 
-              onValueChange={setCheckedCulinary}
-            />
-            <Checkbox
-              value={isCheckedLaw} 
-              onValueChange={setCheckedLaw}
-            /> */}
-          </ScrollView>
+            <Checkboxes department={"AV"} checked={isCheckedAV} onSendCheck={setCheckedAV}/>
+            <Checkboxes department={"Cosmetology"} checked={isCheckedCosmo} onSendCheck={setCheckedCosmo}/>
+            <Checkboxes department={"KCA"} checked={isCheckedKCA} onSendCheck={setCheckedKCA}/>
+            <Checkboxes department={"Adult Transition"} checked={isCheckedAdultTransition} onSendCheck={setCheckedAdultTransition}/>
+            <Checkboxes department={"Health Science"} checked={isCheckedHealthScience} onSendCheck={setCheckedHealthScience}/>
+            <Checkboxes department={"Law"} checked={isCheckedLaw} onSendCheck={setCheckedLaw}/>
+          </View>
+          <View>
+            <Checkboxes department={"Animal Science"} checked={isCheckedAnimalScience} onSendCheck={setCheckedAnimalScience}/>
+            <Checkboxes department={"Architecture"} checked={isCheckedArchitecture} onSendCheck={setCheckedArchitecture}/>
+            <Checkboxes department={"Welding"} checked={isCheckedWelding} onSendCheck={setCheckedWelding}/>
+            <Checkboxes department={"IT"} checked={isCheckedCS} onSendCheck={setCheckedCS}/>
+            <Checkboxes department={"Culinary"} checked={isCheckedCulinary} onSendCheck={setCheckedCulinary}/>
+            <Checkboxes department={"Office"} checked={isCheckedOffice} onSendCheck={setCheckedOffice}/>
+            <Checkboxes department={"Construction"} checked={isCheckedConstruction} onSendCheck={setCheckedContruction}/>
+          </View>
         </View>
-        
+        )}
         <View className="h-3/5 w-screen z-1">
-          {(value == 'Floor 2') ? <SecondFloor/> : <Floor/>}
+          {(value == 'Floor 2') ? <SecondFloor 
+          isCheckedEngineering={isCheckedEngineering}
+          isCheckedAV={isCheckedAV}
+          isCheckedCosmo={isCheckedCosmo}
+          isCheckedKCA={isCheckedKCA}
+          isCheckedAdultTransition={isCheckedAdultTransition}
+          isCheckedHealthScience={isCheckedHealthScience}
+          isCheckedAnimalScience={isCheckedAnimalScience}
+          isCheckedArchitecture={isCheckedArchitecture}
+          isCheckedWelding={isCheckedWelding}
+          isCheckedCS={isCheckedCS}
+          isCheckedCulinary={isCheckedCulinary}
+          isCheckedLaw={isCheckedLaw}
+          isCheckedOffice={isCheckedOffice}
+          isCheckedConstruction={isCheckedConstruction}
+          isFiltered={isFiltered}
+          /> : 
+          <Floor
+          isCheckedEngineering={isCheckedEngineering}
+          isCheckedAV={isCheckedAV}
+          isCheckedCosmo={isCheckedCosmo}
+          isCheckedKCA={isCheckedKCA}
+          isCheckedAdultTransition={isCheckedAdultTransition}
+          isCheckedHealthScience={isCheckedHealthScience}
+          isCheckedAnimalScience={isCheckedAnimalScience}
+          isCheckedArchitecture={isCheckedArchitecture}
+          isCheckedWelding={isCheckedWelding}
+          isCheckedCS={isCheckedCS}
+          isCheckedCulinary={isCheckedCulinary}
+          isCheckedLaw={isCheckedLaw}
+          isCheckedOffice={isCheckedOffice}
+          isCheckedConstruction={isCheckedConstruction}
+          isFiltered={isFiltered}
+          />}
         </View>
         <View className="h-2/6 w-full z-10">
             
