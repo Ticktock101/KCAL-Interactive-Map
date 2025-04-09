@@ -4,7 +4,7 @@ import { Animated, Text, StyleSheet, Button, TouchableOpacity } from 'react-nati
 const RoomNumber = ({ top, left, scale, number, textSize, department, onSendRoomNumber }) => {
 
   const sendDataToParent = () => {
-    onSendMessage(number);
+    onSendRoomNumber(number);
   };
 
   return (
@@ -76,4 +76,3 @@ const styles = StyleSheet.create({
 });
 
 export default RoomNumber;
-{/*lock in bumka*/}

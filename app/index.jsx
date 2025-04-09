@@ -1,23 +1,29 @@
 import { Text, View, SafeAreaView, TouchableOpacity, Image, Button, StyleSheet, ScrollView } from "react-native";
 import Header from "./component/header";
 import Floor from "./component/floor";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SecondFloor from "./component/secondFloor";
 import Checkboxes from "./component/checkbox";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import DropDownPicker from 'react-native-dropdown-picker';
-
+import { readCSV, readString } from 'react-native-csv';
+// import RNFS from 'react-native-fs';
 
 
 export default function Index() {
 
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState('Floor 1');
   const [items, setItems] = useState([
     {label: 'Floor 1', value: 'Floor 1'},
     {label: 'Floor 2', value: 'Floor 2'}
   ]);
+
+  const [csvData, setCsvData] = useState([]);
+
+  const [selectedRoom, setSelectedRoom] = useState([]);
+
 
   const [isFiltered, setIsFiltered] = useState(false);
   const [isCheckedEngineering, setCheckedEngineering] = useState(false);
@@ -36,11 +42,48 @@ export default function Index() {
   const [isCheckedConstruction, setCheckedContruction] = useState(false);
 
 
+  const [data, setData] = useState([]);
+  const [roomNumber, setRoomNumber] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
+
+  // const csvFilePath = RNFS.MainBundlePath + '/rooms.csv'; // Adjust path based on location
 
 
   const filteredPressed = () => {
     setIsFiltered(!isFiltered)
   }
+
+  // useEffect(() => {
+  //   parseCSV(csvData);
+  // }, []);
+
+
+  // const loadCSV = async () => {
+  //   try {
+  //     const fileContent = await RNFS.readFile(csvFilePath, 'utf8');
+  //     parseCSV(fileContent);
+  //   } catch (error) {
+  //     Alert.alert('Error', 'Could not read CSV file: ' + error.message);
+  //   }
+  // };
+
+
+  // const parseCSV = (csvString) => {
+  //   readString(csvString, {
+  //     header: true,
+  //     dynamicTyping: true,
+  //     complete: (result) => {
+  //       setData(result.data);
+  //     },
+  //   });
+  // };
+
+
+
+  // const handleSearch = () => {
+  //   const filtered = data.filter(item => item.RoomNumber == roomNumber);
+  //   setFilteredData(filtered);
+  // };
 
 
   return (
@@ -79,7 +122,7 @@ export default function Index() {
         </View>
         )}
 
-        {isFiltered && (
+        {isFiltered && (value === "Floor 1") && (
         <View className="z-9 h-auto w-screen flex flex-row justify-around mt-3">
           <View className="">
             <Checkboxes department={"Engineering"} checked={isCheckedEngineering} onSendCheck={setCheckedEngineering}/>
@@ -88,10 +131,10 @@ export default function Index() {
             <Checkboxes department={"KCA"} checked={isCheckedKCA} onSendCheck={setCheckedKCA}/>
             <Checkboxes department={"Adult Transition"} checked={isCheckedAdultTransition} onSendCheck={setCheckedAdultTransition}/>
             <Checkboxes department={"Health Science"} checked={isCheckedHealthScience} onSendCheck={setCheckedHealthScience}/>
-            <Checkboxes department={"Law"} checked={isCheckedLaw} onSendCheck={setCheckedLaw}/>
+            <Checkboxes department={"Animal Science"} checked={isCheckedAnimalScience} onSendCheck={setCheckedAnimalScience}/>
+            
           </View>
           <View>
-            <Checkboxes department={"Animal Science"} checked={isCheckedAnimalScience} onSendCheck={setCheckedAnimalScience}/>
             <Checkboxes department={"Architecture"} checked={isCheckedArchitecture} onSendCheck={setCheckedArchitecture}/>
             <Checkboxes department={"Welding"} checked={isCheckedWelding} onSendCheck={setCheckedWelding}/>
             <Checkboxes department={"IT"} checked={isCheckedCS} onSendCheck={setCheckedCS}/>
@@ -101,6 +144,21 @@ export default function Index() {
           </View>
         </View>
         )}
+        {isFiltered && (value === "Floor 2") && (
+        <View className="z-9 h-auto w-screen flex flex-row justify-around mt-3">
+          <View className="">
+            <Checkboxes department={"KCA"} checked={isCheckedKCA} onSendCheck={setCheckedKCA}/>
+            
+            <Checkboxes department={"Health Science"} checked={isCheckedHealthScience} onSendCheck={setCheckedHealthScience}/>
+            <Checkboxes department={"Law"} checked={isCheckedLaw} onSendCheck={setCheckedLaw}/>
+          </View>
+          <View>
+            <Checkboxes department={"Animal Science"} checked={isCheckedAnimalScience} onSendCheck={setCheckedAnimalScience}/>
+            <Checkboxes department={"IT"} checked={isCheckedCS} onSendCheck={setCheckedCS}/>
+            </View>
+        </View>
+        )}
+
         <View className="h-3/5 w-screen z-1">
           {(value == 'Floor 2') ? <SecondFloor 
           isCheckedEngineering={isCheckedEngineering}
