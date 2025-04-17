@@ -8,7 +8,9 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { readCSV, readString } from 'react-native-csv';
-// import RNFS from 'react-native-fs';
+import SelectMultiple from 'react-native-select-multiple'
+import * as FileSystem from 'expo-file-system';
+
 
 
 export default function Index() {
@@ -21,9 +23,6 @@ export default function Index() {
   ]);
 
   const [csvData, setCsvData] = useState([]);
-
-  const [selectedRoom, setSelectedRoom] = useState([]);
-
 
   const [isFiltered, setIsFiltered] = useState(false);
   const [isCheckedEngineering, setCheckedEngineering] = useState(false);
@@ -40,50 +39,69 @@ export default function Index() {
   const [isCheckedLaw, setCheckedLaw] = useState(false);
   const [isCheckedOffice, setCheckedOffice] = useState(false);
   const [isCheckedConstruction, setCheckedContruction] = useState(false);
+  
 
 
   const [data, setData] = useState([]);
   const [roomNumber, setRoomNumber] = useState('');
   const [filteredData, setFilteredData] = useState([]);
 
-  // const csvFilePath = RNFS.MainBundlePath + '/rooms.csv'; // Adjust path based on location
 
+  const csvUri = FileSystem.documentDirectory + 'asset/rooms.csv';
 
   const filteredPressed = () => {
     setIsFiltered(!isFiltered)
   }
 
+  useEffect(() => {
+    loadCSV();
+    // parseCSV(csvData);
+  }, []);
+
   // useEffect(() => {
-  //   parseCSV(csvData);
+  //   const fetchData = async () => {
+  //     try {
+  //       const fileContent = await FileSystem.readAsStringAsync(csvUri);
+  //       parseCSV(fileContent);
+  //     } catch (error) {
+  //       console.error('Error reading CSV:', error.message);
+  //     }
+  //   };
+  
+  //   fetchData();
   // }, []);
 
-
-  // const loadCSV = async () => {
-  //   try {
-  //     const fileContent = await RNFS.readFile(csvFilePath, 'utf8');
-  //     parseCSV(fileContent);
-  //   } catch (error) {
-  //     Alert.alert('Error', 'Could not read CSV file: ' + error.message);
-  //   }
-  // };
-
-
-  // const parseCSV = (csvString) => {
-  //   readString(csvString, {
-  //     header: true,
-  //     dynamicTyping: true,
-  //     complete: (result) => {
-  //       setData(result.data);
-  //     },
-  //   });
-  // };
+  const loadCSV = async () => {
+    try {
+      const fileContent = await FileSystem.readAsStringAsync(csvUri);
+      parseCSV(fileContent);
+    } catch (error) {
+      // Alert.alert('Error', 'Could not read CSV file: ' + error.message);
+      console.error('Error reading CSV:', error.message);
+    }
+  };
 
 
+  const parseCSV = (csvString) => {
+    readString(csvString, {
+      header: true,
+      dynamicTyping: true,
+      complete: (result) => {
+        setData(result.data);
+      },
+    });
+  };
 
-  // const handleSearch = () => {
-  //   const filtered = data.filter(item => item.RoomNumber == roomNumber);
-  //   setFilteredData(filtered);
-  // };
+
+  const handleSearch = () => {
+    const filtered = data.filter(item => item.RoomNumber == roomNumber);
+    setFilteredData(filtered);
+  };
+
+  const handleSetRoomNumber = (number) => {
+    setRoomNumber(number);
+    handleSearch();
+  };
 
 
   return (
@@ -144,6 +162,18 @@ export default function Index() {
           </View>
         </View>
         )}
+
+        {/* <View className="w-screen flex justify-center items-center ">
+          <TouchableOpacity>
+            <Text>Department</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <SelectMultiple
+          items={fruits}
+          selectedItems={state}
+          onSelectionsChange={onSelectionsChange} />
+        </View> */}
         {isFiltered && (value === "Floor 2") && (
         <View className="z-9 h-auto w-screen flex flex-row justify-around mt-3">
           <View className="">
@@ -160,42 +190,56 @@ export default function Index() {
         )}
 
         <View className="h-3/5 w-screen z-1">
-          {(value == 'Floor 2') ? <SecondFloor 
-          isCheckedEngineering={isCheckedEngineering}
-          isCheckedAV={isCheckedAV}
-          isCheckedCosmo={isCheckedCosmo}
-          isCheckedKCA={isCheckedKCA}
-          isCheckedAdultTransition={isCheckedAdultTransition}
-          isCheckedHealthScience={isCheckedHealthScience}
-          isCheckedAnimalScience={isCheckedAnimalScience}
-          isCheckedArchitecture={isCheckedArchitecture}
-          isCheckedWelding={isCheckedWelding}
-          isCheckedCS={isCheckedCS}
-          isCheckedCulinary={isCheckedCulinary}
-          isCheckedLaw={isCheckedLaw}
-          isCheckedOffice={isCheckedOffice}
-          isCheckedConstruction={isCheckedConstruction}
-          isFiltered={isFiltered}
+          {(value == 'Floor 2') ? 
+          <SecondFloor 
+            isCheckedEngineering={isCheckedEngineering}
+            isCheckedAV={isCheckedAV}
+            isCheckedCosmo={isCheckedCosmo}
+            isCheckedKCA={isCheckedKCA}
+            isCheckedAdultTransition={isCheckedAdultTransition}
+            isCheckedHealthScience={isCheckedHealthScience}
+            isCheckedAnimalScience={isCheckedAnimalScience}
+            isCheckedArchitecture={isCheckedArchitecture}
+            isCheckedWelding={isCheckedWelding}
+            isCheckedCS={isCheckedCS}
+            isCheckedCulinary={isCheckedCulinary}
+            isCheckedLaw={isCheckedLaw}
+            isCheckedOffice={isCheckedOffice}
+            isCheckedConstruction={isCheckedConstruction}
+            isFiltered={isFiltered}
           /> : 
           <Floor
-          isCheckedEngineering={isCheckedEngineering}
-          isCheckedAV={isCheckedAV}
-          isCheckedCosmo={isCheckedCosmo}
-          isCheckedKCA={isCheckedKCA}
-          isCheckedAdultTransition={isCheckedAdultTransition}
-          isCheckedHealthScience={isCheckedHealthScience}
-          isCheckedAnimalScience={isCheckedAnimalScience}
-          isCheckedArchitecture={isCheckedArchitecture}
-          isCheckedWelding={isCheckedWelding}
-          isCheckedCS={isCheckedCS}
-          isCheckedCulinary={isCheckedCulinary}
-          isCheckedLaw={isCheckedLaw}
-          isCheckedOffice={isCheckedOffice}
-          isCheckedConstruction={isCheckedConstruction}
-          isFiltered={isFiltered}
+            isCheckedEngineering={isCheckedEngineering}
+            isCheckedAV={isCheckedAV}
+            isCheckedCosmo={isCheckedCosmo}
+            isCheckedKCA={isCheckedKCA}
+            isCheckedAdultTransition={isCheckedAdultTransition}
+            isCheckedHealthScience={isCheckedHealthScience}
+            isCheckedAnimalScience={isCheckedAnimalScience}
+            isCheckedArchitecture={isCheckedArchitecture}
+            isCheckedWelding={isCheckedWelding}
+            isCheckedCS={isCheckedCS}
+            isCheckedCulinary={isCheckedCulinary}
+            isCheckedLaw={isCheckedLaw}
+            isCheckedOffice={isCheckedOffice}
+            isCheckedConstruction={isCheckedConstruction}
+            isFiltered={isFiltered}
+            sendRoomNumberToParent={handleSetRoomNumber}
           />}
         </View>
         <View className="h-2/6 w-full z-10">
+          {filteredData.length > 0 ? (
+            filteredData.map((item, index) => (
+              <View key={index} className="mb-2">
+                <Text className="text-base font-semibold">Room: {item.RoomNumber}</Text>
+                <Text>Department: {item.Department}</Text>
+                
+                {/* Add more fields if needed */}
+              </View>
+            ))
+          ) : (
+            <Text>No room data found</Text>
+          )}
             
 
         </View>

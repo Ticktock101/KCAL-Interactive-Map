@@ -1,11 +1,13 @@
 import React from 'react';
 import { Animated, Text, StyleSheet, Button, TouchableOpacity, Image } from 'react-native';
 
-const RoomPic = ({ top, left, scale, number, textSize, department, onSendRoomNumber }) => {
+const RoomPic = ({ top, left, number, onSendRoomNumber, image }) => {
 
-  const sendDataToParent = () => {
-    onSendRoomNumber(number);
-  };
+  // const sendDataToParent = () => {
+  //   onSendRoomNumber(number);
+  // 
+
+  // {BRR BRR PATAPIM}
 
   return (
     <Animated.View style={[
@@ -16,9 +18,9 @@ const RoomPic = ({ top, left, scale, number, textSize, department, onSendRoomNum
       
       }
       
-    ]} className={"z-9 w-[10%]"}>
-      <TouchableOpacity onPress={sendDataToParent}>
-        <Animated.Image style={[styles.text]} source={require('../images/favicon.png')} className={""}>
+    ]} className={"z-9 w-[2%] h-[2%] object-contain"}>
+      <TouchableOpacity className=''>
+        <Animated.Image style={[styles.text]} source={image} className={"h-fit "} resizeMode={'contain'}>
         </Animated.Image>
       </TouchableOpacity>
     </Animated.View>
@@ -28,10 +30,11 @@ const RoomPic = ({ top, left, scale, number, textSize, department, onSendRoomNum
 const styles = StyleSheet.create({
   roomNumber: {
     position: "absolute",
+    // width: "60%",
   },
   text: {
-    // width: "90%",
-    // height: "90%",
+    width: "100%",
+    height: "100%",
   },
 
 

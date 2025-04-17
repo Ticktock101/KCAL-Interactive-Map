@@ -20,12 +20,14 @@ const Floor = ({
   isCheckedLaw,
   isCheckedOffice,
   isCheckedConstruction,
-  isFiltered }) => {
+  isFiltered,
+  sendRoomNumberToParent }) => {
   
   const [roomNumber, setRoomNumber] = useState(0);
 
   const handleMessageFromChild = (childData) => {
     setRoomNumber(childData);
+    sendRoomNumberToParent(childData);
   };
 
   return (
@@ -172,7 +174,46 @@ const Floor = ({
               </>
             )}
 
-            <RoomPic top={10} left={10}/>
+            {/* health type shi */}
+            {/* fire pull handles 1 floor */}
+            <RoomPic top={38} left={11} image={require('../images/fire.png')}/>
+            <RoomPic top={61} left={2} image={require('../images/fire.png')}/>
+            <RoomPic top={39} left={34} image={require('../images/fire.png')}/>
+            <RoomPic top={42} left={47} image={require('../images/fire.png')}/>
+            <RoomPic top={43} left={60} image={require('../images/fire.png')}/>
+            <RoomPic top={48} left={96} image={require('../images/fire.png')}/>
+            <RoomPic top={55} left={64} image={require('../images/fire.png')}/>
+            <RoomPic top={55} left={75} image={require('../images/fire.png')}/>
+            <RoomPic top={60} left={66} image={require('../images/fire.png')}/>
+            <RoomPic top={65} left={42} image={require('../images/fire.png')}/>
+            <RoomPic top={61} left={34} image={require('../images/fire.png')}/>
+            <RoomPic top={57} left={2} image={require('../images/fire.png')}/>
+
+            {/* extinfuisher */}
+            {/* LA VACA SATURNA SATURNITA */}
+            <RoomPic top={61} left={3} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={46.25} left={9.5} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={39} left={38} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={51} left={46.5} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={49} left={34} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={47} left={52} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={48} left={73.2} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={48} left={91} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={43.5} left={81} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={55} left={72} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={55} left={58} image={require('../images/extinguisher.png')}/>
+
+            {/* first aid */}
+            {/* BRR BRR PATAPIM */}
+            <RoomPic top={47} left={49} image={require('../images/GreenCross.png')}/>
+
+            {/* defibrillator */}
+            <RoomPic top={61.5} left={53.8} image={require('../images/defribrillator.png')}/>
+            <RoomPic top={49} left={73.2} image={require('../images/defribrillator.png')}/>
+            <RoomPic top={43.4} left={75} image={require('../images/defribrillator.png')}/>
+            <RoomPic top={50}left={34} image={require('../images/defribrillator.png')}/>
+            <RoomPic top={54}left={9} image={require('../images/defribrillator.png')}/>
+            
           </View>
         </ReactNativeZoomableView>
       </View>
