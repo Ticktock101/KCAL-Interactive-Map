@@ -7,10 +7,13 @@ import Checkboxes from "./component/checkbox";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { readCSV, readString } from 'react-native-csv';
+import { readCSV, readRemoteFile, readString } from 'react-native-csv';
 import SelectMultiple from 'react-native-select-multiple'
 import * as FileSystem from 'expo-file-system';
-
+// import * as Asset from 'expo-asset';
+import { Asset } from 'expo-asset';
+// import RNFS from 'react-native-fs';
+// import Papa from 'papaparse';
 
 
 export default function Index() {
@@ -46,8 +49,10 @@ export default function Index() {
   const [roomNumber, setRoomNumber] = useState('');
   const [filteredData, setFilteredData] = useState([]);
 
-
-  const csvUri = FileSystem.documentDirectory + 'asset/rooms.csv';
+ 
+  // const csvUri = FileSystem.documentDirectory + './assets/rooms.csv';
+  // const csvUri = './assets/rooms.csv';
+  // const [assets, error] = useAssets([require("./assets/rooms.csv")]);
 
   const filteredPressed = () => {
     setIsFiltered(!isFiltered)
@@ -71,15 +76,31 @@ export default function Index() {
   //   fetchData();
   // }, []);
 
+
   const loadCSV = async () => {
     try {
-      const fileContent = await FileSystem.readAsStringAsync(csvUri);
+      // const fileInfo = await FileSystem.getInfoAsync(csvUri);
+      // if (!fileInfo.exists) {
+      //   console.error('CSV file does not exist at:', csvUri);
+      //   return;
+      // }
+  
+      // const fileContent = await FileSystem.readAsStringAsync(csvUri);
+
+      const [{ csvUri }] = await Asset.loadAsync(require('./assets/rooms.csv'));
+
+      // const asset = await Asset.loadAsync(require('./assets/rooms.csv'));
+      // await asset.downloadAsync(); // Ensure it's downloaded
+
+        // Read the file from its local URI
+      const fileContent = await FileSystem.readAsStringAsync(csvUri.localUri);
+      // const fileContent = await readRemoteFile(csvUri);
       parseCSV(fileContent);
     } catch (error) {
-      // Alert.alert('Error', 'Could not read CSV file: ' + error.message);
       console.error('Error reading CSV:', error.message);
     }
   };
+  
 
 
   const parseCSV = (csvString) => {

@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: "bold",
+    
   },
   engineering: {
     color: "#ff8020"

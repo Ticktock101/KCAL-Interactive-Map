@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { View, StyleSheet } from 'react-native';
 import Floor2Svg from "../images/kcalfloor2.svg";
 import RoomNumber from './roomNumber';
+import RoomPic from './roomPic';
 import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view';
 
 export default function SecondFloor({
@@ -115,6 +116,25 @@ export default function SecondFloor({
             )}
             
             {/* lock in james */}
+
+
+            {/* fire pull handle */}
+            <RoomPic top={50.2} left={60} image={require('../images/fire.png')}/>
+            <RoomPic top={58} left={45} image={require('../images/fire.png')}/>
+
+            {/* defib */}
+            <RoomPic top={49} left={41} image={require('../images/defribrillator.png')}/>
+            <RoomPic top={45} left={61.5} image={require('../images/defribrillator.png')}/>
+
+            {/* extinguisher */}
+            <RoomPic top={54} left={5} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={45} left={17.3} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={43.5} left={36} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={48} left={41} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={54} left={27} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={52} left={59} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={44} left={61.5} image={require('../images/extinguisher.png')}/>
+            <RoomPic top={41.5} left={82} image={require('../images/extinguisher.png')}/>
           </View>
         </ReactNativeZoomableView>
       </View>
