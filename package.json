@@ -21,10 +21,8 @@
     "@react-native-picker/picker": "^2.9.0",
     "@react-navigation/native": "^7.0.0",
     "expo": "^52.0.7",
-    "expo-asset": "~11.0.5",
     "expo-checkbox": "~4.0.1",
     "expo-constants": "~17.0.3",
-    "expo-file-system": "^18.0.12",
     "expo-font": "~13.0.1",
     "expo-linking": "~7.0.3",
     "expo-router": "~4.0.7",
@@ -48,7 +46,9 @@
     "react-native-select-multiple": "^2.1.0",
     "react-native-svg": "^15.10.0",
     "react-native-svg-transformer": "^1.5.0",
-    "react-native-web": "~0.19.13"
+    "react-native-web": "~0.19.13",
+    "expo-file-system": "~18.0.12",
+    "expo-asset": "~11.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

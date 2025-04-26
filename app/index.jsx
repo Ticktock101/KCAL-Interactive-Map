@@ -8,12 +8,10 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { readCSV, readRemoteFile, readString } from 'react-native-csv';
-import SelectMultiple from 'react-native-select-multiple'
-import * as FileSystem from 'expo-file-system';
-// import * as Asset from 'expo-asset';
+import SelectMultiple from 'react-native-select-multiple';
 import { Asset } from 'expo-asset';
-// import RNFS from 'react-native-fs';
-// import Papa from 'papaparse';
+import roomsCSV from './assets/rooms.csv';
+import * as FileSystem from 'expo-file-system';
 
 
 export default function Index() {
@@ -50,9 +48,7 @@ export default function Index() {
   const [filteredData, setFilteredData] = useState([]);
 
  
-  // const csvUri = FileSystem.documentDirectory + './assets/rooms.csv';
-  // const csvUri = './assets/rooms.csv';
-  // const [assets, error] = useAssets([require("./assets/rooms.csv")]);
+
 
   const filteredPressed = () => {
     setIsFiltered(!isFiltered)
@@ -63,38 +59,21 @@ export default function Index() {
     // parseCSV(csvData);
   }, []);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const fileContent = await FileSystem.readAsStringAsync(csvUri);
-  //       parseCSV(fileContent);
-  //     } catch (error) {
-  //       console.error('Error reading CSV:', error.message);
-  //     }
-  //   };
-  
-  //   fetchData();
-  // }, []);
 
 
   const loadCSV = async () => {
     try {
-      // const fileInfo = await FileSystem.getInfoAsync(csvUri);
-      // if (!fileInfo.exists) {
-      //   console.error('CSV file does not exist at:', csvUri);
-      //   return;
-      // }
-  
-      // const fileContent = await FileSystem.readAsStringAsync(csvUri);
+      // const cleanCSV = roomsCSV.trim().split('\n').slice(1).join('\n');
+      // parseCSV(cleanCSV);
 
-      const [{ csvUri }] = await Asset.loadAsync(require('./assets/rooms.csv'));
+      const asset = Asset.fromModule(roomsCSV);
+      
+      if (!asset.localUri) {
+        await asset.downloadAsync();
+      }
 
-      // const asset = await Asset.loadAsync(require('./assets/rooms.csv'));
-      // await asset.downloadAsync(); // Ensure it's downloaded
-
-        // Read the file from its local URI
-      const fileContent = await FileSystem.readAsStringAsync(csvUri.localUri);
-      // const fileContent = await readRemoteFile(csvUri);
+      // const fileUri = FileSystem.documentDirectory + 'assets/roomCsv.csv'; // Make sure the path is correct
+      const fileContent = await FileSystem.readAsStringAsync(asset.localUri);
       parseCSV(fileContent);
     } catch (error) {
       console.error('Error reading CSV:', error.message);
@@ -107,6 +86,7 @@ export default function Index() {
     readString(csvString, {
       header: true,
       dynamicTyping: true,
+      transformHeader: header => header.trim(),
       complete: (result) => {
         setData(result.data);
       },
@@ -114,14 +94,15 @@ export default function Index() {
   };
 
 
-  const handleSearch = () => {
-    const filtered = data.filter(item => item.RoomNumber == roomNumber);
+  const handleSearch = (number) => {
+    const filtered = data.filter(item => item['ROOM NUMBER']?.toString().trim() === number.toString().trim());
+    // const filtered = data.filter(item => item.RoomNumber == number);
     setFilteredData(filtered);
   };
 
   const handleSetRoomNumber = (number) => {
     setRoomNumber(number);
-    handleSearch();
+    handleSearch(number);
   };
 
 
@@ -252,10 +233,13 @@ export default function Index() {
           {filteredData.length > 0 ? (
             filteredData.map((item, index) => (
               <View key={index} className="mb-2">
-                <Text className="text-base font-semibold">Room: {item.RoomNumber}</Text>
-                <Text>Department: {item.Department}</Text>
+                <Text className="text-base font-semibold">Room: {item["ROOM NUMBER"]}</Text>
+                <Text>Subject: {item["SUBJECT"]}</Text>
+                <Text>Teacher: {item["First Name"] + " " + item["Last Name"]}</Text>
+                <Text>Email: {item["Email"]}</Text>
+                <Text>Phone Number: {item["Phone Number"]}</Text>
+
                 
-                {/* Add more fields if needed */}
               </View>
             ))
           ) : (
