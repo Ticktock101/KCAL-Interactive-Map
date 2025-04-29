@@ -1,4 +1,4 @@
-import { Text, View, SafeAreaView, TouchableOpacity, Image, Button, StyleSheet, ScrollView } from "react-native";
+import { Text, View, SafeAreaView, TouchableOpacity, Image, Button, StyleSheet, ScrollView, TextInput } from "react-native";
 import Header from "./component/header";
 import Floor from "./component/floor";
 import React, { useState, useEffect } from 'react';
@@ -23,9 +23,11 @@ export default function Index() {
     {label: 'Floor 2', value: 'Floor 2'}
   ]);
 
+  const [searchQuery, setSearchQuery] = useState('');
   const [csvData, setCsvData] = useState([]);
 
   const [isFiltered, setIsFiltered] = useState(false);
+  const [isSearched, setIsSearched] = useState(false);
   const [isCheckedEngineering, setCheckedEngineering] = useState(false);
   const [isCheckedAV, setCheckedAV] = useState(false);
   const [isCheckedCosmo, setCheckedCosmo] = useState(false);
@@ -46,7 +48,7 @@ export default function Index() {
   const [data, setData] = useState([]);
   const [roomNumber, setRoomNumber] = useState('');
   const [filteredData, setFilteredData] = useState([]);
-
+  const [filteredDataBar, setFilteredDataBar] = useState([]);
  
 
 
@@ -54,17 +56,19 @@ export default function Index() {
     setIsFiltered(!isFiltered)
   }
 
+  const searchPressed = () => {
+    setIsSearched(!isSearched)
+  }
+
   useEffect(() => {
     loadCSV();
-    // parseCSV(csvData);
+    
   }, []);
 
 
 
   const loadCSV = async () => {
     try {
-      // const cleanCSV = roomsCSV.trim().split('\n').slice(1).join('\n');
-      // parseCSV(cleanCSV);
 
       const asset = Asset.fromModule(roomsCSV);
       
@@ -72,7 +76,7 @@ export default function Index() {
         await asset.downloadAsync();
       }
 
-      // const fileUri = FileSystem.documentDirectory + 'assets/roomCsv.csv'; // Make sure the path is correct
+      
       const fileContent = await FileSystem.readAsStringAsync(asset.localUri);
       parseCSV(fileContent);
     } catch (error) {
@@ -96,14 +100,37 @@ export default function Index() {
 
   const handleSearch = (number) => {
     const filtered = data.filter(item => item['ROOM NUMBER']?.toString().trim() === number.toString().trim());
-    // const filtered = data.filter(item => item.RoomNumber == number);
     setFilteredData(filtered);
+  };
+
+  const handleSearchBar = (text) => {
+    const filtered = data.filter(item => item['ROOM NUMBER']?.toString().trim() === text.toString().trim());
+    const filteredFirstName = data.filter(item => item['First Name']?.toString().trim() === text.toString().toUpperCase().trim());
+    const filteredLastName = data.filter(item => item['Last Name']?.toString().trim() === text.toString().toUpperCase().trim());
+
+    if (filtered.length > 0)
+    {
+      setFilteredDataBar(filtered);
+    }
+    else if (filteredFirstName.length > 0)
+    {
+      setFilteredDataBar(filteredFirstName);
+    }
+    else if (filteredLastName.length > 0)
+    {
+      setFilteredDataBar(filteredLastName);
+    }
   };
 
   const handleSetRoomNumber = (number) => {
     setRoomNumber(number);
     handleSearch(number);
   };
+
+  const handleInputChange = (text) => {
+    setSearchQuery(text);
+    handleSearchBar(text);
+  }
 
 
   return (
@@ -119,7 +146,7 @@ export default function Index() {
             <TouchableOpacity className="object-contain w-1/3">
               <Image source={require('./images/gps.png')} className="max-h-full max-w-full" resizeMode="contain"/>
             </TouchableOpacity>
-            <TouchableOpacity className="object-contain w-1/3">
+            <TouchableOpacity className="object-contain w-1/3" onPress={searchPressed}>
               <Image source={require('./images/search.png')} className="max-h-full max-w-full" resizeMode="contain"/>
             </TouchableOpacity>
             <TouchableOpacity className="object-contain w-1/3" onPress={filteredPressed}>
@@ -127,7 +154,7 @@ export default function Index() {
             </TouchableOpacity>
           </View>
         </View>
-        {!isFiltered && (
+        {(!isFiltered || !isSearched) && (
         <View className="h-auto items-center z-10 mx-4">
             <DropDownPicker
               open={open}
@@ -142,7 +169,7 @@ export default function Index() {
         </View>
         )}
 
-        {isFiltered && (value === "Floor 1") && (
+        {(isFiltered && !isSearched && (value === "Floor 1")) && (
         <View className="z-9 h-auto w-screen flex flex-row justify-around mt-3">
           <View className="">
             <Checkboxes department={"Engineering"} checked={isCheckedEngineering} onSendCheck={setCheckedEngineering}/>
@@ -165,17 +192,17 @@ export default function Index() {
         </View>
         )}
 
-        {/* <View className="w-screen flex justify-center items-center ">
-          <TouchableOpacity>
-            <Text>Department</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <SelectMultiple
-          items={fruits}
-          selectedItems={state}
-          onSelectionsChange={onSelectionsChange} />
-        </View> */}
+        {(!isSearched) && (
+        <TextInput
+          placeholder="Search rooms..."
+          value={searchQuery}
+          onChangeText={handleInputChange}
+          returnKeyType="search"
+        >
+        </TextInput>
+        )}
+
+        
         {isFiltered && (value === "Floor 2") && (
         <View className="z-9 h-auto w-screen flex flex-row justify-around mt-3">
           <View className="">
@@ -191,6 +218,8 @@ export default function Index() {
         </View>
         )}
 
+
+        
         <View className="h-3/5 w-screen z-1">
           {(value == 'Floor 2') ? 
           <SecondFloor 
@@ -209,6 +238,8 @@ export default function Index() {
             isCheckedOffice={isCheckedOffice}
             isCheckedConstruction={isCheckedConstruction}
             isFiltered={isFiltered}
+            isSearched={isSearched}
+            sendDataToParent={handleSetRoomNumber}
           /> : 
           <Floor
             isCheckedEngineering={isCheckedEngineering}
@@ -226,20 +257,23 @@ export default function Index() {
             isCheckedOffice={isCheckedOffice}
             isCheckedConstruction={isCheckedConstruction}
             isFiltered={isFiltered}
+            isSearched={isSearched}
             sendRoomNumberToParent={handleSetRoomNumber}
           />}
         </View>
+
+        {/* Show info of teacher subject and contact */}
+
         <View className="h-2/6 w-full z-10">
           {filteredData.length > 0 ? (
             filteredData.map((item, index) => (
               <View key={index} className="mb-2">
                 <Text className="text-base font-semibold">Room: {item["ROOM NUMBER"]}</Text>
                 <Text>Subject: {item["SUBJECT"]}</Text>
-                <Text>Teacher: {item["First Name"] + " " + item["Last Name"]}</Text>
-                <Text>Email: {item["Email"]}</Text>
-                <Text>Phone Number: {item["Phone Number"]}</Text>
+                {(item["First Name"] != null)  &&  (<Text>Teacher: {item["First Name"] + " " + item["Last Name"]} </Text>)}
+                {(item["Email"] != null)  &&  (<Text>Email: {item["Email"]} </Text>)}
+                {(item["Phone Number"] != null)  &&  (<Text>Phone Number: {item["Phone Number"]} </Text>)}  
 
-                
               </View>
             ))
           ) : (

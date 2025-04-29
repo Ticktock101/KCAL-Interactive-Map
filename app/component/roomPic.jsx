@@ -3,11 +3,9 @@ import { Animated, Text, StyleSheet, Button, TouchableOpacity, Image } from 'rea
 
 const RoomPic = ({ top, left, number, onSendRoomNumber, image }) => {
 
-  // const sendDataToParent = () => {
-  //   onSendRoomNumber(number);
-  // 
+  
 
-  // {BRR BRR PATAPIM}
+  
 
   return (
     <Animated.View style={[
@@ -30,7 +28,7 @@ const RoomPic = ({ top, left, number, onSendRoomNumber, image }) => {
 const styles = StyleSheet.create({
   roomNumber: {
     position: "absolute",
-    // width: "60%",
+    
   },
   text: {
     width: "100%",

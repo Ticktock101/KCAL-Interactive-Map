@@ -20,15 +20,19 @@ export default function SecondFloor({
   isCheckedLaw,
   isCheckedOffice,
   isCheckedConstruction,
-  isFiltered
+  isFiltered,
+  isSearched,
+  sendDataToParent,
 }) {
 
   const [roomNumber, setRoomNumber] = useState(0);
   
   const handleMessageFromChild = (childData) => {
     setRoomNumber(childData);
+    sendDataToParent(childData);
   };
-  
+
+  // display room numbers
   return (
       <View className='w-full h-full'>
         <ReactNativeZoomableView
@@ -37,14 +41,14 @@ export default function SecondFloor({
           zoomStep={1}
           initialZoom={1}
           bindToBorders={true}
-          // onZoomAfter={this.logOutZoomState}
+          
         >
           <Floor2Svg width="100%" height="100%" className=''/>
           <View style={styles.roomNumbersContainer}>
 
             {(!isFiltered || (isFiltered && isCheckedOffice)) && (
               <>
-                {/*und*/}
+                {/*und rooms*/}
                 <RoomNumber top={58.5} left={1.95} number={"2100"} textSize={5} department="office" onSendRoomNumber={handleMessageFromChild}/>
                 <RoomNumber top={52.1} left={4.9} number={"2101"} textSize={5} department="office" onSendRoomNumber={handleMessageFromChild}/>
                 <RoomNumber top={53.5} left={10.35} number={"2103"} textSize={3.5} department="office" onSendRoomNumber={handleMessageFromChild}/>
@@ -115,8 +119,8 @@ export default function SecondFloor({
               </>
             )}
             
-            {/* lock in james */}
-
+            
+            {/* emergency objects */}
 
             {/* fire pull handle */}
             <RoomPic top={50.2} left={60} image={require('../images/fire.png')}/>

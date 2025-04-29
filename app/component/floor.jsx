@@ -21,6 +21,7 @@ const Floor = ({
   isCheckedOffice,
   isCheckedConstruction,
   isFiltered,
+  isSearched,
   sendRoomNumberToParent }) => {
   
   const [roomNumber, setRoomNumber] = useState(0);
@@ -30,6 +31,8 @@ const Floor = ({
     sendRoomNumberToParent(childData);
   };
 
+
+  // displays room numbers
   return (
       <View className='w-full h-full'>
         <ReactNativeZoomableView
@@ -45,7 +48,7 @@ const Floor = ({
 
             {(!isFiltered || (isFiltered && isCheckedOffice)) && (
               <>
-                {/*und*/}
+                {/*und rooms*/}
                 <RoomNumber top={50.9} left={13} number={"1703"} textSize={4} />
                 <RoomNumber top={52} left={2.3} number={"1800"} textSize={10} department="office" onSendRoomNumber={handleMessageFromChild}/>
                 <RoomNumber top={62.9} left={7.8} number={"1102"} textSize={3.2} department="office" onSendRoomNumber={handleMessageFromChild}/>
@@ -174,8 +177,9 @@ const Floor = ({
               </>
             )}
 
-            {/* health type shi */}
-            {/* fire pull handles 1 floor */}
+            {/* emergency objects */}
+
+            {/* fire pull handles */}
             <RoomPic top={38} left={11} image={require('../images/fire.png')}/>
             <RoomPic top={61} left={2} image={require('../images/fire.png')}/>
             <RoomPic top={39} left={34} image={require('../images/fire.png')}/>
@@ -190,7 +194,6 @@ const Floor = ({
             <RoomPic top={57} left={2} image={require('../images/fire.png')}/>
 
             {/* extinfuisher */}
-            {/* LA VACA SATURNA SATURNITA */}
             <RoomPic top={61} left={3} image={require('../images/extinguisher.png')}/>
             <RoomPic top={46.25} left={9.5} image={require('../images/extinguisher.png')}/>
             <RoomPic top={39} left={38} image={require('../images/extinguisher.png')}/>
@@ -204,7 +207,6 @@ const Floor = ({
             <RoomPic top={55} left={58} image={require('../images/extinguisher.png')}/>
 
             {/* first aid */}
-            {/* BRR BRR PATAPIM */}
             <RoomPic top={47} left={49} image={require('../images/GreenCross.png')}/>
 
             {/* defibrillator */}
