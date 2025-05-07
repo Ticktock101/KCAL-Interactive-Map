@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 
-const RoomNumber = ({ top, left, scale, number, textSize, department, onSendRoomNumber }) => {
+const RoomNumber = ({ top, left, number, textSize, department, onSendRoomNumber }) => {
 
   const sendDataToParent = () => {
     onSendRoomNumber(number);

@@ -110,15 +110,15 @@ export default function Index() {
 
     if (filtered.length > 0)
     {
-      setFilteredDataBar(filtered);
+      setFilteredData(filtered);
     }
     else if (filteredFirstName.length > 0)
     {
-      setFilteredDataBar(filteredFirstName);
+      setFilteredData(filteredFirstName);
     }
     else if (filteredLastName.length > 0)
     {
-      setFilteredDataBar(filteredLastName);
+      setFilteredData(filteredLastName);
     }
   };
 
@@ -192,7 +192,7 @@ export default function Index() {
         </View>
         )}
 
-        {(!isSearched) && (
+        {(isSearched) && (
         <TextInput
           placeholder="Search rooms..."
           value={searchQuery}
